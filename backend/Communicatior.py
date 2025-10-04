@@ -20,10 +20,10 @@ class Communicator:
             problem = "No joystick. Plug in and restart."
             print(problem)
             self.error_list.append(problem)
-
-        self.joystick = pygame.joystick.Joystick(0)
-        self.joystick.init()
-        print(f"Joystick: \"{self.joystick.get_name()}\".")
+        else:
+            self.joystick = pygame.joystick.Joystick(0)
+            self.joystick.init()
+            print(f"Joystick: \"{self.joystick.get_name()}\".")
 
         # Инициализация конфига
         self.config = ctrl_u.init_json_config()
