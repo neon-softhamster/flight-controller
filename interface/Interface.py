@@ -19,13 +19,12 @@ class Interface:
         # Escape to exit
         self.root.bind('<Escape>', self.on_closing)
         
-        # Запуск бэкенда в отдельном потоке
+        # Queue for backend
         self.backend_queue = queue.Queue()
         self.com = Communicator(self.backend_queue)
         
-        # Добавляем флаг успешной инициализации
+        # backend selfcheck and thread if ok
         self.initialized = False
-        
         if self.com.self_check():
             self.stop_backend_event = threading.Event()
             self.backend_thread = threading.Thread(

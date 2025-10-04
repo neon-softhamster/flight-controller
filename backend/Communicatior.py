@@ -29,15 +29,16 @@ class Communicator:
         self.config = ctrl_u.init_json_config()
 
         # Проверка и открытие порта
+        serial_info = self.config['serial']
         try:
             self.ser = serial.Serial(
-                f'COM{self.config['serial']['port']}', 
-                self.config['serial']['rate'], 
-                timeout = self.config['serial']['timeout']
+                f'COM{serial_info['port']}', 
+                serial_info['rate'], 
+                timeout = serial_info['timeout']
             )
-            print(f'COM{self.config['serial']['port']} is opened.')
+            print(f'COM{serial_info['port']} is opened.')
         except serial.SerialException:
-            problem = "COM port error. Check if transmitter is connected to the port specified in config."
+            problem = f"COM port error. Check if transmitter is connected to the port specified in config (#{serial_info['port']} for now)."
             print(problem)
             self.error_list.append(problem)
     
